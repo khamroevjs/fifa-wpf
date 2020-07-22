@@ -1,0 +1,435 @@
+﻿<Window x:Class="FIFA.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FIFA"
+        xmlns:vm="clr-namespace:FIFA.ViewModel"
+        xmlns:System="clr-namespace:System;assembly=System.Runtime"
+        xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="650" Width="1000" MinHeight="650" MinWidth="1000"
+        d:DataContext="{d:DesignInstance vm:MainViewModel}" BorderThickness="7" BorderBrush="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.45*" />
+            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="0.45*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.3*"/>
+        </Grid.ColumnDefinitions>
+
+        <local:CustomDataGrid Grid.Row="0" Grid.Column="0" ItemsSource="{Binding ComputerTeam}" 
+                              AutoGenerateColumns="False" SelectedItemsList="{Binding ComputerSelectedItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              CanUserAddRows="False">
+
+            <DataGrid.Resources>
+                <Style x:Key="ErrorStyle" TargetType="{x:Type TextBox}">
+                    <Setter Property="Padding" Value="-2"/>
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                            <Setter Property="ToolTip" 
+                                    Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+            <local:CustomDataGrid.Columns>
+
+                <DataGridTextColumn Header="Short Name" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="ShortName"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Long Name" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="LongName"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Age" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Age"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="Date of Birth">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DateOfBirth, StringFormat='dd/MM/yyyy'}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateOfBirth}" DisplayDateEnd="{Binding Mode=OneTime, Source={x:Static System:DateTime.Today}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Height" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Height"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Weight" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Weight"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Nationality" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Nationality"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Club" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Club"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Overall" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Overall"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Potential" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Potential"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Sofifa ID" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="SofifaID"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Player URL" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="PlayerURL"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+            </local:CustomDataGrid.Columns>
+
+        </local:CustomDataGrid>
+
+        <local:CustomDataGrid Grid.Row="2" Grid.Column="0" ItemsSource="{Binding UserTeam}" 
+                              AutoGenerateColumns="False" SelectedItemsList="{Binding UserSelectedItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              CanUserAddRows="False">
+
+            <dxmvvm:Interaction.Behaviors>
+                <dxmvvm:EventToCommand Command="{Binding CurrentCellChangedCommand}" EventName="CurrentCellChanged"/>
+            </dxmvvm:Interaction.Behaviors>
+
+            <DataGrid.Resources>
+                <Style x:Key="ErrorStyle" TargetType="{x:Type TextBox}">
+                    <Setter Property="Padding" Value="-2"/>
+                    <Style.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="Background" Value="Red"/>
+                            <Setter Property="ToolTip" 
+                                    Value="{Binding RelativeSource={RelativeSource Self}, Path=(Validation.Errors)[0].ErrorContent}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+
+            <local:CustomDataGrid.Columns>
+
+                <DataGridTextColumn Header="Short Name" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="ShortName"
+                                 ValidatesOnDataErrors="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Long Name" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="LongName"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Age" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Age"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTemplateColumn Header="Date of Birth">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DateOfBirth, StringFormat='dd/MM/yyyy'}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding DateOfBirth}" DisplayDateEnd="{Binding Mode=OneTime, Source={x:Static System:DateTime.Today}}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Height" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Height"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Weight" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Weight"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Nationality" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Nationality"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Club" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Club"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Overall" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Overall"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Potential" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="Potential"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Sofifa ID" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="SofifaID"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+                <DataGridTextColumn Header="Player URL" EditingElementStyle="{StaticResource ErrorStyle}">
+                    <DataGridTextColumn.Binding>
+                        <Binding Path="PlayerURL"
+                                 ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+
+            </local:CustomDataGrid.Columns>
+
+        </local:CustomDataGrid>
+
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Height" Value="30"/>
+                    <Setter Property="Width" Value="150"/>
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Margin" Value="8"/>
+                </Style>
+            </StackPanel.Resources>
+
+            <Button Command="{Binding AddCommand}" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/downArrow.png" Margin="3"/>
+                    <TextBlock Text="Add"/>
+                </StackPanel>
+            </Button>
+
+            <Button Command="{Binding RemoveCommand}" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Resources/upArrow.png" Margin="3"/>
+                    <TextBlock Text="Remove"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.2*" />
+                <RowDefinition Height="0.5*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Setter Property="FontSize" Value="18"/>
+                    <Setter Property="Margin" Value="0,0,10,0"/>
+                </Style>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="FontSize" Value="18"/>
+                </Style>
+            </Grid.Resources>
+
+            <TextBlock Text="Nationality:" Grid.Row="1" Grid.Column="0" />
+            <TextBox Height="30" Width="150" Grid.Row="1" Grid.Column="1" Text="{Binding NationalityTextBox, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Overall:" Grid.Row="2" Grid.Column="0" />
+            <TextBox Height="30" Width="150" Grid.Row="2" Grid.Column="1" Text="{Binding OverallTextBox, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Potential:" Grid.Row="3" Grid.Column="0" />
+            <TextBox Height="30" Width="150" Grid.Row="3" Grid.Column="1" Text="{Binding PotentialTextBox, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+
+        <Canvas Grid.Row="2" Grid.Column="1">
+            <TextBlock Text="{Binding UserTeam.Count, StringFormat='Footballers: {0}'}" FontSize="20" Canvas.Left="50" Canvas.Top="50"/>
+            <Button  Command="{Binding StartGameCommand}" IsEnabled="{Binding StartGameIsEnabled}" Content="Start Game" Height="35" Width="120" FontSize="20" Canvas.Right="25" Canvas.Bottom="25"/>
+        </Canvas>
+
+    </Grid>
+</Window>

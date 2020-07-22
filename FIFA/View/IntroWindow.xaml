@@ -1,0 +1,29 @@
+﻿<Window x:Class="FIFA.View.IntroWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:FIFA.ViewModel"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="IntroWindow" Height="400" Width="500" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.DataContext>
+        <vm:IntroViewModel/>
+    </Window.DataContext>
+
+    <StackPanel VerticalAlignment="Center" >
+        <StackPanel.Resources>
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="15"/>
+                <Setter Property="FontFamily" Value="Segoe UI"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Width" Value="200"/>
+            </Style>
+        </StackPanel.Resources>
+
+        <Button Content="New Game" Command="{Binding NewGameCommand}"/>
+        <Button Content="Continue" Command="{Binding ContinueCommand}" IsEnabled="{Binding ContinueIsEnabled}"/>
+    </StackPanel>
+</Window>
