@@ -10,3 +10,12 @@
 - Winner will be determined by a special formula by using footballers properties like "potential" and "overall"
 
 See the "Task.pdf" file to learn more.
+
+## Introduction Page
+<img src="Screenshots/IntroductionPage.png" width="450"/>
+
+## Selection Page
+<img src="Screenshots/SelectionPage.png"/>
+
+## Gameplay
+<img src="Screenshots/Gameplay.png"/>
