@@ -1,4 +1,4 @@
-# FIFA_WPF
+# FIFA-WPF
 ## Attention
 **Program has been made for demonstrating the author's knowledge in .NET and in pattern MVVM.**
 
